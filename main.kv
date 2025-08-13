@@ -1,0 +1,144 @@
+ScreenManager:
+    MenuScreen:
+    SketchScreen:
+    UploadSketchScreen:
+    AddPhotoScreen:
+
+<MenuScreen>:
+    name: "menu"
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(40)
+
+        MDLabel:
+            text: "Facial Sketching System"
+            halign: "center"
+            font_style: "H4"
+
+        MDRaisedButton:
+            text: "Make a Sketch"
+            on_release: app.change_screen("sketch")
+
+        MDRaisedButton:
+            text: "Upload a Sketch"
+            on_release: app.change_screen("upload")
+
+        MDRaisedButton:
+            text: "Add Photo to Database"
+            on_release: app.change_screen("add_photo")
+
+
+<SketchScreen>:
+    name: "sketch"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(10)
+        spacing: dp(10)
+
+        MDBoxLayout:
+            id: canvas_area
+            size_hint_y: 0.7
+            md_bg_color: 0.95, 0.95, 0.95, 1
+            padding: 5
+        
+        MDTextField:
+            id: filename_input
+            hint_text: "Enter filename"
+            mode: "rectangle"
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}
+
+        ScrollView:
+            size_hint_y: None
+            height: dp(130)
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: dp(5)
+            scroll_type: ['bars', 'content']
+            
+            MDBoxLayout:
+                id: image_row
+                orientation: "horizontal"
+                size_hint_x: None
+                height: self.minimum_height
+                width: self.minimum_width
+                spacing: dp(10)
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "48dp"
+            spacing: 5
+
+            MDRaisedButton:
+                text: "Head"
+                on_release: root.toggle_images("head")
+            MDRaisedButton:
+
+                text: "Eyes"
+                
+                on_release: root.toggle_images("eyes")
+            MDRaisedButton:
+                text: "Eyebrows"
+                on_release: root.toggle_images("eyebrows")
+            MDRaisedButton:
+                text: "Hair"
+                on_release: root.toggle_images("hair")
+            MDRaisedButton:
+                text: "Head"
+                on_release: root.toggle_images("head")
+            MDRaisedButton:
+                text: "Lips"
+                on_release: root.toggle_images("mouth")
+            MDRaisedButton:
+                text: "Nose"
+                on_release: root.toggle_images("nose")
+            MDRaisedButton:
+                text: "Save"
+                md_bg_color: 1, 0, 0, 1
+                on_release: root.save_canvas(filename_input.text)
+        MDRaisedButton:
+            text: "Back to Menu"
+            on_release: app.change_screen("menu")
+    
+
+
+
+
+<UploadSketchScreen>:
+    name: "upload"
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(40)
+
+        MDLabel:
+            text: "Sketch-to-Photo Matching"
+            halign: "center"
+            font_style: "H4"
+
+        MDRaisedButton:
+            text: "Upload Sketch & Match"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.open_upload_popup()
+        MDRaisedButton:
+            text: "Back to Menu"
+            on_release: app.change_screen("menu")
+
+
+<AddPhotoScreen>:
+    name: "add_photo"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDLabel:
+            text: "Add Photo to Database"
+            halign: "center"
+        MDRaisedButton:
+            text: "Choose Photo"
+            on_release: app.open_add_photo()
+        MDRaisedButton:
+            text: "Back to Menu"
+            on_release: app.change_screen("menu")
