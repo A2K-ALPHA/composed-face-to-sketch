@@ -1,4 +1,4 @@
-USE the enviornment.yml file for enviornment packages installation
+USE the enviornment.yml file for enviornment packages installation In the enviornment
 
 use this link to download the model 
 
